@@ -33,15 +33,9 @@ typedef struct __PHONE_BOOK_ENTRY {
     struct __PHONE_BOOK_ENTRY *pNext;
 } entry;
 
-#define TWO_POWER_NUM 8
-#define MAX_HASH_TABLE_SIZE 1 << TWO_POWER_NUM
+#define MAX_HASH_TABLE_SIZE 42737
 
-typedef struct __HASH_SLOT {
-    entry *data;
-    struct __HASH_SLOT *pNext;
-} slot_unit;
-
-slot_unit *hashTable[MAX_HASH_TABLE_SIZE];
+entry *hashTable[MAX_HASH_TABLE_SIZE];
 
 entry *findName(char lastname[], entry *pHead);
 entry *append(char lastName[], entry *e);

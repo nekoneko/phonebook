@@ -8,15 +8,14 @@
 entry *findName(char lastname[], entry *pHead)
 {
     unsigned int hashPos;
-    slot_unit *slot;
 
     hashPos = hashFunction(stringToInt(lastname));
-    slot = hashTable[hashPos];
+    pHead = hashTable[hashPos];
 
-    while (slot!=NULL) {
-        if (strcasecmp(lastname, slot->data->lastName) == 0)
-            return slot->data;
-        slot = slot->pNext;
+    while (pHead!=NULL) {
+        if (strcasecmp(lastname, pHead->lastName) == 0)
+            return pHead;
+        pHead = pHead->pNext;
     }
     return NULL;
 }
@@ -24,21 +23,15 @@ entry *findName(char lastname[], entry *pHead)
 entry *append(char lastName[], entry *e)
 {
     /* allocate memory for the new entry and put lastName */
-    e->pNext = (entry *) malloc(sizeof(entry));
-    e->detail = NULL;
-    e = e->pNext;
-    strcpy(e->lastName, lastName);
-    e->pNext = NULL;
-
     unsigned int hashPos;
-    slot_unit *newSlot;
 
     hashPos = hashFunction(stringToInt(lastName));
 
-    newSlot = (slot_unit *) malloc(sizeof(slot_unit));
-    newSlot->pNext = hashTable[hashPos];
-    newSlot->data = e;
-    hashTable[hashPos] = newSlot;
+    e = (entry *) malloc(sizeof(entry));
+    e->pNext = hashTable[hashPos];
+    strcpy(e->lastName, lastName);
+    e->detail = NULL;
+    hashTable[hashPos] = e;
 
     return e;
 }
@@ -53,5 +46,5 @@ unsigned int stringToInt(char *key)
 
 unsigned int hashFunction(unsigned int key)
 {
-    return key & ((1<<TWO_POWER_NUM) - 1);
+    return key % MAX_HASH_TABLE_SIZE;
 }

@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
 
 #if defined(HASH)
     FILE *__fp;
-    slot_unit *__entry;
+    entry *__entry;
     unsigned int __count;
     __fp = fopen("hash_slots.txt", "w");
     for (__i=0; __i<MAX_HASH_TABLE_SIZE; ++__i) {

@@ -1,5 +1,5 @@
 reset
-set title 'hash function by division (M=256)'
+set title 'hash function by division (M=42737)'
 set xlabel 'bucket address'
 set ylabel 'slots number'
 set term png enhanced font 'Verdana,10'
