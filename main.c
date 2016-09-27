@@ -99,6 +99,23 @@ int main(int argc, char *argv[])
     printf("execution time of append() : %lf sec\n", cpu_time1);
     printf("execution time of findName() : %lf sec\n", cpu_time2);
 
+#if defined(HASH)
+    FILE *__fp;
+    slot_unit *__entry;
+    unsigned int __count;
+    __fp = fopen("hash_slots.txt", "w");
+    for (__i=0; __i<MAX_HASH_TABLE_SIZE; ++__i) {
+        __count = 0;
+        __entry = hashTable[__i];
+        while (__entry) {
+            ++__count;
+            __entry = __entry->pNext;
+        }
+        fprintf(__fp, "%d %d\n", __i, __count);
+    }
+    fclose(__fp);
+#endif
+
     if (pHead->pNext) free(pHead->pNext);
     free(pHead);
 

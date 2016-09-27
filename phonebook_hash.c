@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -38,6 +39,7 @@ entry *append(char lastName[], entry *e)
     newSlot->pNext = hashTable[hashPos];
     newSlot->data = e;
     hashTable[hashPos] = newSlot;
+
     return e;
 }
 
